@@ -1,28 +1,54 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <MyContatore :numeroDiClick="numeroDiClick" />
+
+    <MyBottone @pincopallino="incrementaDiUno" />
+
+    <MyProvaPassaggioDati @provaPassaggioDati="ricevoDatiDaFiglio"/>
+
+    <!-- <button @click="incrementaDiUno">Incrementa contatore</button> -->
+
+
+    <h2>Numero casuale: {{numeroCasuale}}</h2>
+    <MyPassaggioNumeroCasuale @eventoNumeroCasuale="ricevoNumeroCasuale" />
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MyContatore from './components/MyContatore.vue';
+import MyBottone from './components/MyBottone.vue';
+import MyProvaPassaggioDati from './components/MyProvaPassaggioDati.vue';
+import MyPassaggioNumeroCasuale from './components/MyPassaggioNumeroCasuale.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MyContatore,
+    MyBottone,
+    MyProvaPassaggioDati,
+    MyPassaggioNumeroCasuale
+  },
+  data() {
+    return {
+      numeroDiClick: 10,
+      numeroCasuale: 0,
+    }
+  },
+  methods: {
+    incrementaDiUno() {
+      this.numeroDiClick ++;
+    },
+    ricevoDatiDaFiglio(datoCheVoglioRicevere, secondoValoreRicevuto) {
+      alert(secondoValoreRicevuto)
+    },
+    ricevoNumeroCasuale(numeroCasualeRicevuto) {
+      this.numeroCasuale = numeroCasualeRicevuto;
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
